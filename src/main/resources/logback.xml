@@ -1,0 +1,29 @@
+<configuration>
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- text mode will output plain text for console, by default will log in json (for datadog) -->
+        <if condition='property("LOGGING_MODE").equals("text")'>
+            <then>
+                <withJansi>true</withJansi>
+                <encoder>
+                    <pattern>%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n</pattern>
+                </encoder>
+            </then>
+            <else>
+                <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                    <messageSplitRegex>\\n</messageSplitRegex>
+                    <customFields>${LOGGING_CUSTOM_FIELDS:-{}}</customFields>
+                </encoder>
+            </else>
+        </if>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <include resource="logback-custom.xml" optional="true"/>
+</configuration>

@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group 'com.github.rollo-team'
+
+dependencies {
+    api 'net.logstash.logback:logstash-logback-encoder:7.1.1'
+    api 'org.codehaus.janino:janino:3.1.7'
+}
