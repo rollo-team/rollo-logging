@@ -1,4 +1,6 @@
-<configuration>
+<configuration debug="false" packagingData="true">
+    <jmxConfigurator />
+
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
@@ -24,6 +26,8 @@
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
+
+    <logger name="org.jooq.Constants" level="warn"/>
 
     <include resource="logback-custom.xml" optional="true"/>
 </configuration>
